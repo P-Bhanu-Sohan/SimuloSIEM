@@ -16,8 +16,8 @@ SimuloSIEM ingests synthetic security logs, simulates detection of threats like 
 ```mermaid
 graph TD
   A[Log Generator (Python)] --> B[Kafka (raw-logs topic)]
-  B --> C[Vector.dev (Parser)]
-  C --> D[PostgreSQL (Structured Storage)]
+  B --> C[Vector.dev Parser]
+  C --> D[PostgreSQL]
   C --> E[Redis (Cache)]
   E --> F[Detection Engine (Python)]
   F --> G[Kafka (alerts topic)]
