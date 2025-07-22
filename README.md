@@ -32,7 +32,8 @@ This project serves as an excellent educational tool for understanding the intri
 SimuloSIEM's architecture is designed for scalability and modularity, mimicking a typical SIEM deployment. Logs flow through a pipeline of specialized services, each handling a specific aspect of the SIEM process. The system is built around a central message bus (Kafka) that facilitates asynchronous and decoupled communication between components.
 
 ```mermaid
-graph TD
+graph LR
+    %% Nodes
     LG[Log Generator] --> K(Kafka)
     K --> V(Vector)
     K --> DE(Detection Engine)
@@ -44,7 +45,8 @@ graph TD
     PG --> G(Grafana)
     R --> G
 
-    subgraph DataFlow [Data Flow]
+    %% Data Flow
+    subgraph DataFlow["Data Flow"]
         LG -- "1. Generates synthetic logs (JSON)" --> K
         K -- "2. Raw logs stream (Topic: raw-logs)" --> V
         K -- "2. Raw logs stream (Topic: raw-logs)" --> DE
@@ -57,14 +59,17 @@ graph TD
         R -- "7. Queries for Visualization" --> G
     end
 
-    style LG fill:#f9f,stroke:#333,stroke-width:2px
-    style K fill:#bbf,stroke:#333,stroke-width:2px
-    style V fill:#bfb,stroke:#333,stroke-width:2px
-    style DE fill:#fbb,stroke:#333,stroke-width:2px
-    style PG fill:#ccf,stroke:#333,stroke-width:2px
-    style R fill:#ffc,stroke:#333,stroke-width:2px
-    style G fill:#cfc,stroke:#333,stroke-width:2px
+    %% Dark Theme Styles
+    style LG fill:#8e44ad,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
+    style K fill:#2980b9,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
+    style V fill:#27ae60,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
+    style DE fill:#c0392b,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
+    style PG fill:#16a085,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
+    style R fill:#f39c12,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
+    style G fill:#2ecc71,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
 
+    %% Make lines straight
+    linkStyle default stroke:#bdc3c7,stroke-width:2px
 ```
 
 **Detailed Architectural Flow:**
