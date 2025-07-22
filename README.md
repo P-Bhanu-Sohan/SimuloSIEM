@@ -12,7 +12,7 @@
 
 ## 1. Project Overview
 
-SimuloSIEM is a comprehensive, containerized Security Information and Event Management (SIEM) system designed for simulating and demonstrating real-time log collection, processing, anomaly detection, and visualization. It provides a hands-on environment to understand the fundamental components and workflows of a modern SIEM solution, from log generation to alert presentation.
+SimuloSIEM is a  containerized Security Information and Event Management (SIEM) system designed for simulating and demonstrating real-time log collection, processing, anomaly detection, and visualization.
 
 **Core Functionalities:**
 -   **Synthetic Log Generation:** A dedicated Python service (`log-generator`) continuously produces realistic security-related logs (e.g., login attempts, sudo commands, file access, network scans) to simulate diverse network activity. This allows for testing and demonstration without relying on live production data.
@@ -20,12 +20,11 @@ SimuloSIEM is a comprehensive, containerized Security Information and Event Mana
 -   **Flexible Log Processing and Routing:** Vector, a high-performance observability data router, consumes raw logs from Kafka. It is configured to parse, transform, and enrich these logs before routing them to various destinations, ensuring data is in the correct format for subsequent analysis and storage.
 -   **Persistent Log Storage:** All processed log data is reliably stored in a PostgreSQL relational database. This provides a robust and queryable repository for historical analysis, auditing, and compliance purposes.
 -   **Real-time Anomaly Detection:** A custom Python-based Detection Engine continuously monitors the incoming log stream from Kafka. It applies predefined security rules (e.g., brute-force detection, privilege escalation) to identify suspicious activities and potential threats in real-time.
--   **Ephemeral Alert Management:** Redis, an in-memory data store, is utilized by the Detection Engine to manage ephemeral state (e.g., tracking failed login attempts for a short duration) and to store real-time alerts. This allows for rapid retrieval and display of active alerts in live dashboards.
+-   ** Alert Management:** Redis, an in-memory data store, is utilized by the Detection Engine to manage ephemeral state (e.g., tracking failed login attempts for a short duration) and to store real-time alerts. This allows for rapid retrieval and display of active alerts in live dashboards.
 -   **Historical Alert Persistence:** In addition to ephemeral storage, all detected security alerts are also persisted in the PostgreSQL database. This ensures a complete historical record of all security incidents for long-term analysis, trend identification, and post-incident investigations.
 -   **Interactive Data Visualization:** Grafana is integrated to provide powerful and intuitive dashboards. These dashboards offer real-time and historical views of logs and alerts, enabling security analysts to visualize trends, identify top alerted entities (IPs, users), and drill down into raw log data for deeper insights.
 -   **Containerized Deployment:** The entire SimuloSIEM ecosystem is containerized using Docker and orchestrated with Docker Compose. This simplifies setup, ensures environment consistency, and provides portability across different development and testing environments.
 
-This project serves as an excellent educational tool for understanding the intricate workings of a SIEM system, from data flow and component interaction to threat detection methodologies.
 
 ## 2. System Architecture
 
@@ -201,7 +200,7 @@ The system primarily uses Kafka as its central communication bus, acting as a hi
 -   **Simplicity vs. Production Readiness:** SimuloSIEM prioritizes clarity and ease of understanding for educational purposes. While it demonstrates core SIEM concepts, it's not designed for production-scale deployments without significant enhancements (e.g., Kafka replication, Vector scaling, robust error handling, security hardening).
 -   **Synthetic Data:** The use of a synthetic log generator simplifies setup but means the system operates on idealized data. Real-world logs are far more complex and varied, requiring more sophisticated parsing and normalization.
 -   **Rule-Based Detection:** The Detection Engine uses simple, rule-based detection. This is effective for known patterns but lacks the adaptability of machine learning-based anomaly detection for unknown threats.
--   **Ephemeral Redis Data:** Alerts stored in Redis have a short expiration. This is great for live dashboards but means Redis is not a source of truth for historical alerts. PostgreSQL serves that purpose.
+-   **Redis Data:** Alerts stored in Redis have a short expiration. This is great for live dashboards but means Redis is not a source of truth for historical alerts. PostgreSQL serves that purpose.
 -   **Resource Consumption:** Continuous log generation and processing can consume significant CPU, memory, and disk space over time, especially for Kafka and PostgreSQL.
 -   **Monitoring:** While Grafana provides dashboards, comprehensive monitoring of the health and performance of individual services (e.g., Kafka consumer lag, Vector throughput) would require additional tools (e.g., Prometheus, Alertmanager).
 
@@ -303,6 +302,9 @@ Once all services are up and running, you can access them via your web browser:
 ## 10. Conclusion
 
 SimuloSIEM provides a practical and observable environment for understanding the core components and data flow within a modern SIEM system. By simulating log generation, real-time processing, anomaly detection, and visualization, it offers a valuable educational tool for cybersecurity enthusiasts, developers, and students.
+
+## Improvements
+Currently the SIEM is trivial as we are using rule based systems, I am working on ensuring better synthetic log generation emulating better real time data along with ML based threat detection too. 
 
 ## Usefulness as a Foundation:
 
