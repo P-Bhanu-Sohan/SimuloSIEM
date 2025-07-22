@@ -32,17 +32,19 @@ This project serves as an excellent educational tool for understanding the intri
 SimuloSIEM's architecture is designed for scalability and modularity, mimicking a typical SIEM deployment. Logs flow through a pipeline of specialized services, each handling a specific aspect of the SIEM process. The system is built around a central message bus (Kafka) that facilitates asynchronous and decoupled communication between components.
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#1e1e1e', 'edgeLabelBackground':'#1e1e1e', 'fontFamily':'monospace', 'lineColor':'#cccccc'}}}%%
 graph LR
+
     %% Nodes
-    LG[Log Generator] --> K(Kafka)
-    K --> V(Vector)
-    K --> DE(Detection Engine)
+    LG[Log Generator] --> K[Kafka]
+    K --> V[Vector]
+    K --> DE[Detection Engine]
     V --> PG[PostgreSQL]
-    V --> R(Redis)
+    V --> R[Redis]
     DE --> R
     DE --> K
     DE --> PG
-    PG --> G(Grafana)
+    PG --> G[Grafana]
     R --> G
 
     %% Data Flow
@@ -59,17 +61,17 @@ graph LR
         R -- "7. Queries for Visualization" --> G
     end
 
-    %% Dark Theme Styles
-    style LG fill:#8e44ad,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
-    style K fill:#2980b9,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
-    style V fill:#27ae60,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
-    style DE fill:#c0392b,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
-    style PG fill:#16a085,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
-    style R fill:#f39c12,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
-    style G fill:#2ecc71,stroke:#ecf0f1,stroke-width:2px,color:#ecf0f1
+    %% Colors for Dark Mode
+    style LG fill:#5bc0de,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style K fill:#9b59b6,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style V fill:#27ae60,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style DE fill:#e74c3c,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style PG fill:#3498db,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style R fill:#c0392b,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style G fill:#e67e22,stroke:#ffffff,stroke-width:2px,color:#ffffff
 
-    %% Make lines straight
-    linkStyle default stroke:#bdc3c7,stroke-width:2px
+    %% Straight lines
+    linkStyle default stroke:#cccccc,stroke-width:2px,fill:none
 ```
 
 **Detailed Architectural Flow:**
