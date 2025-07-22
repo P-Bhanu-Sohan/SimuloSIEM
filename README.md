@@ -32,10 +32,14 @@ This project serves as an excellent educational tool for understanding the intri
 SimuloSIEM's architecture is designed for scalability and modularity, mimicking a typical SIEM deployment. Logs flow through a pipeline of specialized services, each handling a specific aspect of the SIEM process. The system is built around a central message bus (Kafka) that facilitates asynchronous and decoupled communication between components.
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#1e1e1e', 'edgeLabelBackground':'#1e1e1e', 'fontFamily':'monospace', 'lineColor':'#cccccc'}}}%%
-graph LR
-
-    %% Nodes
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#1e1e1e',
+  'primaryTextColor': '#ffffff',
+  'lineColor': '#cccccc',
+  'fontFamily': 'monospace'
+}}}%%
+flowchart LR
+    %% Main Nodes
     LG[Log Generator] --> K[Kafka]
     K --> V[Vector]
     K --> DE[Detection Engine]
@@ -47,31 +51,30 @@ graph LR
     PG --> G[Grafana]
     R --> G
 
-    %% Data Flow
-    subgraph DataFlow["Data Flow"]
-        LG -- "1. Generates synthetic logs (JSON)" --> K
-        K -- "2. Raw logs stream (Topic: raw-logs)" --> V
-        K -- "2. Raw logs stream (Topic: raw-logs)" --> DE
-        V -- "3. Processed logs (to PostgreSQL)" --> PG
-        V -- "3. Processed logs (to Redis)" --> R
-        DE -- "4. Alerts (Topic: alerts)" --> K
-        DE -- "5. Alerts & Logs" --> PG
-        DE -- "6. Live Alerts & State" --> R
-        PG -- "7. Queries for Visualization" --> G
-        R -- "7. Queries for Visualization" --> G
-    end
+    %% Data Flow Labels
+    LG --> K
+    K --> V
+    K --> DE
+    V --> PG
+    V --> R
+    DE --> K
+    DE --> PG
+    DE --> R
+    PG --> G
+    R --> G
 
-    %% Colors for Dark Mode
-    style LG fill:#5bc0de,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    %% Node Colors
+    style LG fill:#00bcd4,stroke:#ffffff,stroke-width:2px,color:#ffffff
     style K fill:#9b59b6,stroke:#ffffff,stroke-width:2px,color:#ffffff
     style V fill:#27ae60,stroke:#ffffff,stroke-width:2px,color:#ffffff
     style DE fill:#e74c3c,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style PG fill:#3498db,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style PG fill:#2980b9,stroke:#ffffff,stroke-width:2px,color:#ffffff
     style R fill:#c0392b,stroke:#ffffff,stroke-width:2px,color:#ffffff
     style G fill:#e67e22,stroke:#ffffff,stroke-width:2px,color:#ffffff
 
-    %% Straight lines
-    linkStyle default stroke:#cccccc,stroke-width:2px,fill:none
+    %% Line Style
+    linkStyle default stroke:#cccccc,stroke-width:2px
+
 ```
 
 **Detailed Architectural Flow:**
