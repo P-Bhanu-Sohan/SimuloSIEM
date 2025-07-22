@@ -44,7 +44,7 @@ graph TD
     PG --> G(Grafana)
     R --> G
 
-    subgraph Data Flow
+    subgraph DataFlow [Data Flow]
         LG -- "1. Generates synthetic logs (JSON)" --> K
         K -- "2. Raw logs stream (Topic: raw-logs)" --> V
         K -- "2. Raw logs stream (Topic: raw-logs)" --> DE
@@ -64,6 +64,7 @@ graph TD
     style PG fill:#ccf,stroke:#333,stroke-width:2px
     style R fill:#ffc,stroke:#333,stroke-width:2px
     style G fill:#cfc,stroke:#333,stroke-width:2px
+
 ```
 
 **Detailed Architectural Flow:**
