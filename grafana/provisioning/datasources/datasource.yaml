@@ -1,0 +1,16 @@
+apiVersion: 1
+
+datasources:
+  - name: PostgreSQL
+    type: postgres
+    access: proxy
+    url: postgres:5432
+    database: simulosiem
+    user: user
+    isDefault: true
+    editable: false
+    secureJsonData:
+      password: password
+    jsonData:
+      sslmode: disable
+      timescaledb: false
